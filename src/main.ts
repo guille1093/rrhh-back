@@ -63,9 +63,13 @@ async function bootstrap() {
 
   // Swagger Docs
   let swaggerPath = '';
-  if (process.env.SWAGGER_DOCS && process.env.SWAGGER_DOCS === '1') {
+  if (
+    process.env.SWAGGER_DOCS &&
+    process.env.SWAGGER_DOCS === '1' &&
+    process.env.NODE_ENV !== 'production'
+  ) {
     const configSwagger = new DocumentBuilder()
-      .setTitle(config.get<string>('DESCRIPTION') || 'FMA-API')
+      .setTitle(config.get<string>('DESCRIPTION') || 'API')
       .setVersion(config.get<string>('VERSION') || '1.0')
       .addApiKey({
         type: 'apiKey',
