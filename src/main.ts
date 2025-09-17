@@ -62,33 +62,33 @@ async function bootstrap() {
   });
 
   // Swagger Docs
-  let swaggerPath = '';
-  if (
-    process.env.SWAGGER_DOCS &&
-    process.env.SWAGGER_DOCS === '1' &&
-    process.env.NODE_ENV !== 'production'
-  ) {
-    const configSwagger = new DocumentBuilder()
-      .setTitle(config.get<string>('DESCRIPTION') || 'API')
-      .setVersion(config.get<string>('VERSION') || '1.0')
-      .addApiKey({
-        type: 'apiKey',
-        name: 'x-api-key',
-        in: 'header',
-        description: 'API Key For External calls',
-      })
-      .addBearerAuth({
-        type: 'apiKey',
-        name: 'Authorization',
-        in: 'header',
-        description: 'JWT Token use Bearer',
-      })
-      .build();
-    const document = SwaggerModule.createDocument(app, configSwagger);
-    fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
-    swaggerPath = `${basepath}${basepath !== '' ? '/' : ''}api-docs`;
-    SwaggerModule.setup(swaggerPath, app, document);
-  }
+  //   let swaggerPath = '';
+  //   if (
+  //     process.env.SWAGGER_DOCS &&
+  //     process.env.SWAGGER_DOCS === '1' &&
+  //     process.env.NODE_ENV !== 'production'
+  //   ) {
+  //     const configSwagger = new DocumentBuilder()
+  //       .setTitle(config.get<string>('DESCRIPTION') || 'API')
+  //       .setVersion(config.get<string>('VERSION') || '1.0')
+  //       .addApiKey({
+  //         type: 'apiKey',
+  //         name: 'x-api-key',
+  //         in: 'header',
+  //         description: 'API Key For External calls',
+  //       })
+  //       .addBearerAuth({
+  //         type: 'apiKey',
+  //         name: 'Authorization',
+  //         in: 'header',
+  //         description: 'JWT Token use Bearer',
+  //       })
+  //       .build();
+  //     const document = SwaggerModule.createDocument(app, configSwagger);
+  //     fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+  //     swaggerPath = `${basepath}${basepath !== '' ? '/' : ''}api-docs`;
+  //     SwaggerModule.setup(swaggerPath, app, document);
+  //   }
 
   // Validation
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
@@ -103,8 +103,8 @@ async function bootstrap() {
   await app.listen(config.get<number>('PORT') || 3000);
 
   // Log the application status
-  LOGGER.log(`FMA-API Time Zone - ${config.get<string>('TZ')}`);
-  LOGGER.log(`FMA-API Started - ${await app.getUrl()}/${basepath}`);
+  LOGGER.log(`RRHH-API Time Zone - ${config.get<string>('TZ')}`);
+  LOGGER.log(`RRHH-API Started - ${await app.getUrl()}/${basepath}`);
   LOGGER.log(
     `Swagger Docs - ${await app.getUrl()}/${basepath}${basepath !== '' ? '/' : ''}api-docs`,
   );
