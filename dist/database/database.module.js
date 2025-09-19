@@ -19,20 +19,19 @@ exports.DatabaseModule = DatabaseModule = __decorate([
             typeorm_1.TypeOrmModule.forRootAsync({
                 inject: [config_1.ConfigService],
                 useFactory: (configService) => {
-                    const host = configService.get('DATABASE_HOST');
-                    const port = configService.get('DATABASE_PORT');
-                    const username = configService.get('DATABASE_USERNAME');
-                    const password = configService.get('DATABASE_PASSWORD');
-                    const database = configService.get('DATABASE_NAME');
                     return {
                         type: 'postgres',
-                        host,
-                        port,
-                        username,
-                        password,
-                        database,
-                        entities: ['src/**/*.entity.{ts,js}'],
-                        migrations: ['./migrations/*.{ts,js}'],
+                        host: configService.get('DATABASE_HOST'),
+                        port: Number(configService.get('DATABASE_PORT')),
+                        username: configService.get('DATABASE_USERNAME'),
+                        password: configService.get('DATABASE_PASSWORD'),
+                        database: configService.get('DATABASE_NAME'),
+                        entities: [
+                            __dirname + '/../users/entities/user.entity{.ts,.js}',
+                            __dirname + '/../roles/entities/role.entity{.ts,.js}',
+                            __dirname + '/../permissions/entities/permission.entity{.ts,.js}',
+                        ],
+                        migrations: [__dirname + '/../../db-migration/*.{ts,js}'],
                         migrationsTableName: 'migrations',
                         synchronize: true,
                         logging: false,
