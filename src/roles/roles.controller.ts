@@ -9,9 +9,9 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { RolesService } from '@/roles/roles.service';
-import { RoleDto } from '@/roles/dto/role.dto';
-import { IdDTO, ResposeDTO } from '@/base/dto/base.dto';
+import { RolesService } from './roles.service';
+import { RoleDto } from './dto/role.dto';
+import { IdDTO, ResposeDTO } from './../base/dto/base.dto';
 import { RolePaginationDto } from './dto/role.pagination.dto';
 
 @ApiTags('Roles')

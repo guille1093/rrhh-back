@@ -6,8 +6,8 @@ import {
   Index,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Department } from '@/departments/entities/department.entity';
-import { Employee } from '@/employees/entities/employee.entity';
+import { Department } from '../../departments/entities/department.entity';
+import { Employee } from '../../employees/entities/employee.entity';
 import { OneToMany, JoinColumn } from 'typeorm';
 
 @Entity('positions')

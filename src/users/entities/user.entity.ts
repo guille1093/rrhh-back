@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude, instanceToPlain } from 'class-transformer';
-import { Role } from '@/roles/entities/role.entity';
+import { Role } from '../../roles/entities/role.entity';
 
 @Entity('users')
 export class User {

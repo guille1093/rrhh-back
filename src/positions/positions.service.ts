@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Position } from './entities/position.entity';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
-import { Department } from '@/departments/entities/department.entity';
+import { Department } from '../departments/entities/department.entity';
 
 @Injectable()
 export class PositionsService {

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Employee } from '@/employees/entities/employee.entity';
-import { Department } from '@/departments/entities/department.entity';
-import { Area } from '@/areas/entities/area.entity';
-import { Position } from '@/positions/entities/position.entity';
-import { Contract } from '@/employees/entities/contract.entity';
-import { Request } from '@/requests/entities/request.entity';
-import { Holiday } from '@/holidays/entities/holiday.entity';
+import { Employee } from '../employees/entities/employee.entity';
+import { Department } from '../departments/entities/department.entity';
+import { Area } from '../areas/entities/area.entity';
+import { Position } from '../positions/entities/position.entity';
+import { Contract } from '../employees/entities/contract.entity';
+import { Request } from '../requests/entities/request.entity';
+import { Holiday } from '../holidays/entities/holiday.entity';
 
 @Injectable()
 export class ReportsService {

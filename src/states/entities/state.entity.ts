@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { City } from '@/cities/entities/city.entity';
+import { City } from '../../cities/entities/city.entity';
 
 @Entity('states')
 export class State {

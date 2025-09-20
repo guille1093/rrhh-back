@@ -3,7 +3,7 @@ import { AlertsGateway } from '../alerts/alerts.gateway';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Request } from './entities/request.entity';
-import { Employee } from '@/employees/entities/employee.entity';
+import { Employee } from '../employees/entities/employee.entity';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
 

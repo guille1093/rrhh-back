@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
-import { UserDto } from '@/users/dto/user.dto';
-import { User } from '@/users/entities/user.entity';
+import { UserDto } from './dto/user.dto';
+import { User } from './entities/user.entity';
 import { IsNull, Like, Repository } from 'typeorm';
-import { PaginationResponseDTO } from '@/base/dto/base.dto';
+import { PaginationResponseDTO } from '../base/dto/base.dto';
 import { UserPaginationDto } from './dto/user.pagination.dto';
 
 @Injectable()
@@ -46,26 +46,37 @@ export class UsersService {
     const emptyResponse = {
       total: 0,
       pageSize: 0,
-      offset: params.query.offset ?? 0,
+      offset: typeof params.query.offset === 'number' ? params.query.offset : 0,
       results: [],
     };
     try {
       if (Object.keys(params.query).length === 0) {
         return emptyResponse;
       }
-      if (params.query.pageSize?.toString() === '0') {
+      if (params.query.pageSize && params.query.pageSize.toString() === '0') {
         return emptyResponse;
       }
 
       const order = {};
       if (params.query.orderBy && params.query.orderType) {
-        order[params.query.orderBy] = params.query.orderType;
+        if (
+          typeof params.query.orderBy === 'string' &&
+          typeof params.query.orderType === 'string'
+        ) {
+          order[params.query.orderBy] = params.query.orderType;
+        }
       }
 
       const forPage = params.query.pageSize
-        ? parseInt(params.query.pageSize.toString(), 10) || 10
+        ? (() => {
+            if (typeof params.query.pageSize === 'number') {
+              return params.query.pageSize;
+            }
+            return 10;
+          })()
         : 10;
-      const skip = params.query.offset;
+      const skip =
+        typeof params.query.offset === 'number' ? params.query.offset : 0;
       const [users, total] = await this.userRepository.findAndCount({
         where: {
           firstName: params.query.firstName
@@ -81,13 +92,14 @@ export class UsersService {
         relations: ['role', 'role.permissions'],
         order,
         take: forPage,
-        skip: skip,
+        skip,
       });
 
       return {
         total: total,
         pageSize: forPage,
-        offset: params.query.offset || 0,
+        offset:
+          typeof params.query.offset === 'number' ? params.query.offset : 0,
         results: users,
       };
     } catch (error: any) {

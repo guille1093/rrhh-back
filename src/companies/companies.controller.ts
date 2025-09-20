@@ -12,9 +12,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
-import { IdDTO, ResposeDTO } from '@/base/dto/base.dto';
-import { BaseController } from '@/base/base.controller';
-import { Auth } from '@/auth/auth.decorator';
+import { IdDTO, ResposeDTO } from './../base/dto/base.dto';
+import { BaseController } from '../base/base.controller';
+import { Auth } from '../auth/auth.decorator';
 
 @Controller('companies')
 @ApiTags('Companies')

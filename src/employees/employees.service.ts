@@ -4,11 +4,11 @@ import { Repository } from 'typeorm';
 import { Employee } from './entities/employee.entity';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
-import { Department } from '@/departments/entities/department.entity';
-import { Position } from '@/positions/entities/position.entity';
-import { Company } from '@/companies/entities/company.entity';
+import { Department } from '../departments/entities/department.entity';
+import { Position } from '../positions/entities/position.entity';
+import { Company } from '../companies/entities/company.entity';
 import { EmployeePaginationDto } from './dto/employee.pagination.dto';
-import { PaginationResponseDTO } from '@/base/dto/base.dto';
+import { PaginationResponseDTO } from './../base/dto/base.dto';
 
 @Injectable()
 export class EmployeesService {

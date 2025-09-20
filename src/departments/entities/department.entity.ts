@@ -8,9 +8,9 @@ import {
   Index,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Area } from '@/areas/entities/area.entity';
-import { Position } from '@/positions/entities/position.entity';
-import { Employee } from '@/employees/entities/employee.entity';
+import { Area } from '../../areas/entities/area.entity';
+import { Position } from '../../positions/entities/position.entity';
+import { Employee } from '../../employees/entities/employee.entity';
 
 @Entity('departments')
 @Index(['name', 'area'], { unique: true })

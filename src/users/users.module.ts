@@ -4,8 +4,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { User } from './entities/user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { Role } from '@/roles/entities/role.entity';
-import { Permission } from '@/permissions/entities/permission.entity';
+import { Role } from '../roles/entities/role.entity';
+import { Permission } from '../permissions/entities/permission.entity';
 
 @Module({
   imports: [
