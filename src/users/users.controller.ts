@@ -17,7 +17,7 @@ import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
 import { BaseController } from '../base/base.controller';
 import { UserDto } from './dto/user.dto';
 import { UserPaginationDto } from './dto/user.pagination.dto';
-import { Auth } from '../auth/auth.decorator';
+import { Auth } from './../auth/auth.decorator';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller('users')

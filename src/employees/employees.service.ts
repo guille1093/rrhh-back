@@ -8,7 +8,7 @@ import { Department } from '../departments/entities/department.entity';
 import { Position } from '../positions/entities/position.entity';
 import { Company } from '../companies/entities/company.entity';
 import { EmployeePaginationDto } from './dto/employee.pagination.dto';
-import { PaginationResponseDTO } from '../base/dto/base.dto';
+import { PaginationResponseDTO } from './../base/dto/base.dto';
 
 @Injectable()
 export class EmployeesService {

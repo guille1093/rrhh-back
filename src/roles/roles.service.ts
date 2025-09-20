@@ -40,17 +40,19 @@ export class RolesService {
     const [results, total] = await this.roleRepository.findAndCount({
       where: { deletedAt: IsNull() },
       relations: ['permissions'],
-      skip: offset,
-      take: pageSize,
+      skip: typeof offset === 'number' ? offset : 0,
+      take: typeof pageSize === 'number' ? pageSize : 10,
       order: {
-        [orderBy]: orderType,
+        ...(typeof orderBy === 'string' && typeof orderType === 'string'
+          ? { [orderBy]: orderType }
+          : {}),
       },
     });
 
     return {
       total,
-      pageSize: pageSize,
-      offset,
+      pageSize: typeof pageSize === 'number' ? pageSize : 10,
+      offset: typeof offset === 'number' ? offset : 0,
       results,
     };
   }
