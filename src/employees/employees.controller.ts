@@ -1,4 +1,5 @@
 import {
+  Controller,
   Get,
   Post,
   Body,
@@ -8,13 +9,12 @@ import {
   Inject,
   Query,
 } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeePaginationDto } from './dto/employee.pagination.dto';
 import { IdDTO, ResposeDTO } from './../base/dto/base.dto';
-import { Query } from '@nestjs/common';
 import { BaseController } from '../base/base.controller';
 import { Auth } from '../auth/auth.decorator';
 
