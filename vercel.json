@@ -23,5 +23,6 @@
             }
         }
     ],
-    "outputDirectory": "dist"
+    "outputDirectory": "dist",
+    "buildCommand": "npm run vercel:build"
 }
