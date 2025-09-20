@@ -1,8 +1,8 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ReportsService } from './reports.service';
-import { BaseController } from '@/base/base.controller';
-import { Auth } from '@/auth/auth.decorator';
+import { BaseController } from '../base/base.controller';
+import { Auth } from '../auth/auth.decorator';
 
 @Controller('reports')
 @ApiTags('Reports')

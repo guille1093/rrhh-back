@@ -8,7 +8,7 @@ import {
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
-import { City } from '@/cities/entities/city.entity';
+import { City } from '../../cities/entities/city.entity';
 
 @Entity('clients')
 @Unique(['cuil'])

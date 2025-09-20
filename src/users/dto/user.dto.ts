@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsArray, IsDate, IsOptional, IsString } from 'class-validator';
-import { Role } from '@/roles/entities/role.entity';
+import { Role } from '../../roles/entities/role.entity';
 
 export class UserDto {
   @IsOptional()

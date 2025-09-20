@@ -12,9 +12,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PositionsService } from './positions.service';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
-import { IdDTO, ResposeDTO } from '@/base/dto/base.dto';
-import { BaseController } from '@/base/base.controller';
-import { Auth } from '@/auth/auth.decorator';
+import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
+import { BaseController } from '../base/base.controller';
+import { Auth } from '../auth/auth.decorator';
 
 @Controller('positions')
 @ApiTags('Positions')

@@ -1,4 +1,4 @@
-import { PermissionsGuard } from '@/auth/permissions.guard';
+import { PermissionsGuard } from '../auth/permissions.guard';
 import { Logger } from '@nestjs/common';
 import { Controller, Get, UseGuards } from '@nestjs/common';
 

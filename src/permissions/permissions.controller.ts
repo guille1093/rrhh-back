@@ -11,8 +11,8 @@ import {
 import { PermissionsService } from './permissions.service';
 import { CreatePermissionDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
-import { Auth } from '@/auth/auth.decorator';
-import { BaseController } from '@/base/base.controller';
+import { Auth } from '../auth/auth.decorator';
+import { BaseController } from '../base/base.controller';
 import { ApiTags } from '@nestjs/swagger';
 import { In } from 'typeorm';
 

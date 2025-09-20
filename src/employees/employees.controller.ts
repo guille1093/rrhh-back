@@ -16,9 +16,9 @@ import { EmployeePaginationDto } from './dto/employee.pagination.dto';
 import { IdDTO, ResposeDTO } from '@/base/dto/base.dto';
 import { Query } from '@nestjs/common';
 import { BaseController } from '@/base/base.controller';
-import { Auth } from '@/auth/auth.decorator';
-
-@Controller('employees')
+  import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
+  import { BaseController } from '../base/base.controller';
+  import { Auth } from '../auth/auth.decorator';
 @ApiTags('Employees')
 export class EmployeesController extends BaseController {
   @Inject(EmployeesService)
@@ -49,14 +49,15 @@ export class EmployeesController extends BaseController {
   @Get(':id')
   @Auth('read:employees')
   @ApiOperation({ summary: 'Get Employee by ID (nested by hierarchy)' })
-  async findOne(@Param('id') id: number): Promise<ResposeDTO> {
+    import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
     const employee = await this.employeesService.findOne(Number(id));
     // Anidar jerarquía: company > area > department > position
     const department = employee.department;
     const area = department?.area;
     const company = area?.company;
-    const position = employee.position;
+    import { BaseController } from '../base/base.controller';
     const nested = {
+    import { Auth } from '../auth/auth.decorator';
       id: employee.id,
       firstName: employee.firstName,
       lastName: employee.lastName,
