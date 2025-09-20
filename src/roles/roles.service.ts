@@ -1,10 +1,10 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull, In } from 'typeorm';
-import { Role } from '@/roles/entities/role.entity';
+import { Role } from './entities/role.entity';
 import { RoleDto } from './dto/role.dto';
-import { PaginationResponseDTO } from '@/base/dto/base.dto';
-import { Permission } from '@/permissions/entities/permission.entity';
+import { PaginationResponseDTO } from '../base/dto/base.dto';
+import { Permission } from '../permissions/entities/permission.entity';
 import { RolePaginationDto } from './dto/role.pagination.dto';
 
 @Injectable()

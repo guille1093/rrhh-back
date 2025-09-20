@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
-import { UserDto } from '@/users/dto/user.dto';
-import { User } from '@/users/entities/user.entity';
+import { UserDto } from './dto/user.dto';
+import { User } from './entities/user.entity';
 import { IsNull, Like, Repository } from 'typeorm';
-import { PaginationResponseDTO } from '@/base/dto/base.dto';
+import { PaginationResponseDTO } from '../base/dto/base.dto';
 import { UserPaginationDto } from './dto/user.pagination.dto';
 
 @Injectable()

@@ -1,5 +1,4 @@
 import {
-  Controller,
   Get,
   Post,
   Body,
@@ -7,19 +6,16 @@ import {
   Patch,
   Delete,
   Inject,
+  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation } from '@nestjs/swagger';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeePaginationDto } from './dto/employee.pagination.dto';
-import { IdDTO, ResposeDTO } from '@/base/dto/base.dto';
-import { Query } from '@nestjs/common';
-import { BaseController } from '@/base/base.controller';
-  import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
-  import { BaseController } from '../base/base.controller';
-  import { Auth } from '../auth/auth.decorator';
-@ApiTags('Employees')
+import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
+import { BaseController } from '../base/base.controller';
+import { Auth } from '../auth/auth.decorator';
 export class EmployeesController extends BaseController {
   @Inject(EmployeesService)
   private readonly employeesService: EmployeesService;
@@ -44,46 +40,6 @@ export class EmployeesController extends BaseController {
   async findAll(@Query() query: EmployeePaginationDto): Promise<ResposeDTO> {
     const employees = await this.employeesService.findAll(query);
     return { status: 'success', data: employees };
-  }
-
-  @Get(':id')
-  @Auth('read:employees')
-  @ApiOperation({ summary: 'Get Employee by ID (nested by hierarchy)' })
-    import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
-    const employee = await this.employeesService.findOne(Number(id));
-    // Anidar jerarquía: company > area > department > position
-    const department = employee.department;
-    const area = department?.area;
-    const company = area?.company;
-    import { BaseController } from '../base/base.controller';
-    const nested = {
-    import { Auth } from '../auth/auth.decorator';
-      id: employee.id,
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      email: employee.email,
-      company: company && {
-        id: company.id,
-        name: company.name,
-        address: company.address,
-        phone: company.phone,
-        email: company.email,
-        industry: company.industry,
-        area: area && {
-          id: area.id,
-          name: area.name,
-          department: department && {
-            id: department.id,
-            name: department.name,
-            position: position && {
-              id: position.id,
-              name: position.name,
-            },
-          },
-        },
-      },
-    };
-    return { status: 'success', data: nested };
   }
 
   @Patch(':id')

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Area } from './entities/area.entity';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
-import { Company } from '@/companies/entities/company.entity';
+import { Company } from '../companies/entities/company.entity';
 
 @Injectable()
 export class AreasService {
