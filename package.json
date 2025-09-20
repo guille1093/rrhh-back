@@ -23,7 +23,8 @@
         "typeorm:mgr:cre": "npm run typeorm -- migration:create ./migrations/",
         "typeorm:mgr:run": "npm run typeorm -- migration:run -d ./src/database/database.datasource.ts",
         "typeorm:mgr:rev": "npm run typeorm -- migration:revert -d ./src/database/database.datasource.ts",
-        "typeorm:sync": "npm run typeorm -- schema:sync -d ./src/database/database.datasource.ts"
+        "typeorm:sync": "npm run typeorm -- schema:sync -d ./src/database/database.datasource.ts",
+        "vercel:build": "npm run build"
     },
     "dependencies": {
         "@nestjs/common": "^11.0.1",
