@@ -5,8 +5,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Inject,
   Param,
   Patch,
@@ -27,7 +25,7 @@ import { JwtService } from '@nestjs/jwt';
 export class UsersController extends BaseController {
   @Inject(UsersService)
   private readonly userService: UsersService;
-  private jwtService: JwtService;
+  private readonly jwtService: JwtService;
 
   constructor() {
     super(UsersController);
@@ -51,7 +49,6 @@ export class UsersController extends BaseController {
     @Req() request: { user: User },
     @Param('id') id: number,
   ): Promise<ResposeDTO> {
-    console.log('request.user', request.user);
     const userDto = new UserDto();
     userDto.id = id;
     const user = await this.userService.getBy(userDto);
@@ -60,22 +57,13 @@ export class UsersController extends BaseController {
   ////////////////////////////////////////////////
   ////////////////////////////////////////////////
   @Get('whoami')
-  //   @Auth('read:users')
   @ApiOperation({ summary: 'Get User by ID' })
-  async whoami(
-    @Req() request: { user: User },
-    // @Param('id') id: number,
-  ): Promise<ResposeDTO> {
-    console.log('request.user', request.user);
-    const userDto = new UserDto();
-    userDto.id = request.user.id;
-    console.log('userDto', userDto);
-    try {
-      //   const user = await this.userService.getBy(userDto);
-      return { status: 'success', data: 'user' };
-    } catch (error) {
-      return { status: 'error', data: error };
-    }
+  async whoami(@Req() request: { user: User }): Promise<ResposeDTO> {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    return {
+      status: 'success',
+      data: request.user,
+    };
   }
   ////////////////////////////////////////////////
   ////////////////////////////////////////////////
@@ -95,7 +83,6 @@ export class UsersController extends BaseController {
   async update(
     @Param() params: IdDTO,
     @Body() body: UserDto,
-    @Req() request: { user: User },
   ): Promise<ResposeDTO> {
     return {
       status: 'success',

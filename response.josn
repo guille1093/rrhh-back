@@ -1,0 +1,59 @@
+{
+    "status": "success",
+    "data": {
+        "id": 2,
+        "firstName": "Pedro Pablo",
+        "lastName": "Adorno",
+        "email": "Pablo.Adorno_4@email.com",
+        "department": {
+            "id": 93,
+            "name": "Producción",
+            "area": {
+                "id": 42,
+                "name": "Comercial",
+                "company": {
+                    "id": 60,
+                    "name": "TurisAr",
+                    "address": "Calle Mitre 222, Bariloche",
+                    "phone": "0294-901-2345",
+                    "email": "info@turisar.com",
+                    "industry": "Turismo"
+                }
+            }
+        },
+        "position": {
+            "id": 269,
+            "name": "Analista"
+        }
+    }
+},
+
+{
+    "status": "success",
+    "data": {
+        "id": 2,
+        "firstName": "Pedro Pablo",
+        "lastName": "Adorno",
+        "email": "Pablo.Adorno_4@email.com",
+        "company": {
+            "id": 60,
+            "name": "TurisAr",
+            "address": "Calle Mitre 222, Bariloche",
+            "phone": "0294-901-2345",
+            "email": "info@turisar.com",
+            "industry": "Turismo",
+            "area": {
+                "id": 42,
+                "name": "Comercial",
+                "department": {
+                    "id": 93,
+                    "name": "Producción",
+                    "position": {
+                        "id": 269,
+                        "name": "Analista"
+                    }
+                },
+            }
+        }
+    }
+}
