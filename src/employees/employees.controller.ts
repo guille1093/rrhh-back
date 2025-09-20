@@ -1,5 +1,4 @@
 import {
-  Controller,
   Get,
   Post,
   Body,
@@ -7,8 +6,9 @@ import {
   Patch,
   Delete,
   Inject,
+  Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation } from '@nestjs/swagger';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
@@ -44,45 +44,6 @@ export class EmployeesController extends BaseController {
   async findAll(@Query() query: EmployeePaginationDto): Promise<ResposeDTO> {
     const employees = await this.employeesService.findAll(query);
     return { status: 'success', data: employees };
-  }
-
-  @Get(':id')
-  @Auth('read:employees')
-  @ApiOperation({ summary: 'Get Employee by ID (nested by hierarchy)' })
-  async findOne(@Param('id') id: number): Promise<ResposeDTO> {
-    const employee = await this.employeesService.findOne(Number(id));
-    // Anidar jerarquía: company > area > department > position
-    const department = employee.department;
-    const area = department?.area;
-    const company = area?.company;
-    const position = employee.position;
-    const nested = {
-      id: employee.id,
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      email: employee.email,
-      company: company && {
-        id: company.id,
-        name: company.name,
-        address: company.address,
-        phone: company.phone,
-        email: company.email,
-        industry: company.industry,
-        area: area && {
-          id: area.id,
-          name: area.name,
-          department: department && {
-            id: department.id,
-            name: department.name,
-            position: position && {
-              id: position.id,
-              name: position.name,
-            },
-          },
-        },
-      },
-    };
-    return { status: 'success', data: nested };
   }
 
   @Patch(':id')

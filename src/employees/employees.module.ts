@@ -5,7 +5,6 @@ import { EmployeesService } from './employees.service';
 import { EmployeesController } from './employees.controller';
 import { Employee } from './entities/employee.entity';
 import { Department } from '../departments/entities/department.entity';
-// import eliminado por duplicado
 import { Position } from '../positions/entities/position.entity';
 import { ContractsModule } from './contracts.module';
 
