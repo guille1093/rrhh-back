@@ -8,6 +8,7 @@ import {
   Delete,
   Inject,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { EmployeesService } from './employees.service';

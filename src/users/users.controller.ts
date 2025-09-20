@@ -11,6 +11,7 @@ import {
   Post,
   Query,
   Req,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IdDTO, ResposeDTO } from '../base/dto/base.dto';
@@ -47,7 +48,7 @@ export class UsersController extends BaseController {
   @ApiOperation({ summary: 'Get User by ID' })
   async getById(
     @Req() request: { user: User },
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<ResposeDTO> {
     const userDto = new UserDto();
     userDto.id = id;

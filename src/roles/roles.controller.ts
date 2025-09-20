@@ -7,6 +7,7 @@ import {
   Param,
   Body,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { RolesService } from './roles.service';
@@ -28,8 +29,8 @@ export class RolesController {
   ////////////////////////////////////////////////
   @Get(':id')
   @ApiOperation({ summary: 'Get Role by ID' })
-  async getById(@Param() params: IdDTO): Promise<ResposeDTO> {
-    const role = await this.rolesService.getBy(params.id);
+  async getById(@Param('id', ParseIntPipe) id: number): Promise<ResposeDTO> {
+    const role = await this.rolesService.getBy(id);
     return { status: 'success', data: role };
   }
   ////////////////////////////////////////////////

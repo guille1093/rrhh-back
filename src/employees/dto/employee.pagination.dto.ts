@@ -17,15 +17,12 @@ export class EmployeeFilterDto {
   email?: string;
 
   @IsOptional()
-  @IsNumber()
   companyId?: number;
 
   @IsOptional()
-  @IsNumber()
   departmentId?: number;
 
   @IsOptional()
-  @IsNumber()
   positionId?: number;
 }
 

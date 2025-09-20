@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { HolidaysService } from './holidays.service';
 import { CreateHolidayDto } from './dto/create-holiday.dto';
@@ -26,8 +27,8 @@ export class HolidaysController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.holidaysService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.holidaysService.findOne(id);
   }
 
   @Patch(':id')

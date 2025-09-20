@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country.dto';
@@ -26,8 +27,8 @@ export class CountriesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.countriesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.countriesService.findOne(id);
   }
 
   @Patch(':id')

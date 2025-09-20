@@ -7,6 +7,7 @@ import {
   Patch,
   Delete,
   Inject,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CompaniesService } from './companies.service';
@@ -47,8 +48,8 @@ export class CompaniesController extends BaseController {
   @Get(':id')
   @Auth('read:companies')
   @ApiOperation({ summary: 'Get Company by ID' })
-  async findOne(@Param('id') id: number): Promise<ResposeDTO> {
-    const company = await this.companiesService.findOne(Number(id));
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<ResposeDTO> {
+    const company = await this.companiesService.findOne(id);
     return { status: 'success', data: company };
   }
 

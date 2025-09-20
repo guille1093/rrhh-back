@@ -7,6 +7,7 @@ import {
   Patch,
   Delete,
   Inject,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PositionsService } from './positions.service';
@@ -47,8 +48,8 @@ export class PositionsController extends BaseController {
   @Get(':id')
   @Auth('read:positions')
   @ApiOperation({ summary: 'Get Position by ID' })
-  async findOne(@Param('id') id: number): Promise<ResposeDTO> {
-    const position = await this.positionsService.findOne(Number(id));
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<ResposeDTO> {
+    const position = await this.positionsService.findOne(id);
     return { status: 'success', data: position };
   }
 

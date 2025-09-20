@@ -3,21 +3,19 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
-  Inject,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { PERMISSIONS_KEY } from './auth.decorator';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { UserDto } from '../users/dto/user.dto';
 import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
   constructor(
-    private reflector: Reflector,
-    private jwtService: JwtService,
-    private usersService: UsersService,
+    private readonly reflector: Reflector,
+    private readonly jwtService: JwtService,
+    private readonly usersService: UsersService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -41,8 +39,6 @@ export class PermissionsGuard implements CanActivate {
       console.error('Token verification failed:', error);
       throw new ForbiddenException('Invalid token', error);
     }
-
-    console.log('decoded', decoded.id);
     const user: User = await this.usersService.getBy(decoded.id);
     request.user = user;
 
