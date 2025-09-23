@@ -8,7 +8,6 @@ import {
   Delete,
   Inject,
   Query,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { EmployeesService } from './employees.service';
@@ -45,6 +44,14 @@ export class EmployeesController extends BaseController {
   async findAll(@Query() query: EmployeePaginationDto): Promise<ResposeDTO> {
     const employees = await this.employeesService.findAll(query);
     return { status: 'success', data: employees };
+  }
+
+  @Get(':id')
+  @Auth('read:employees')
+  @ApiOperation({ summary: 'Get Employee by ID' })
+  async findOne(@Param() params: IdDTO): Promise<ResposeDTO> {
+    const employee = await this.employeesService.findOne(Number(params.id));
+    return { status: 'success', data: employee };
   }
 
   @Patch(':id')

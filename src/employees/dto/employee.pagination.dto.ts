@@ -1,7 +1,7 @@
 import { IntersectionType } from '@nestjs/swagger';
 import { PaginationRequestDTO } from '../../base/dto/base.dto';
 // Define los campos de búsqueda para Employee
-import { IsOptional, IsString, IsNumber } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class EmployeeFilterDto {
   @IsOptional()

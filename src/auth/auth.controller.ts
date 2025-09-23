@@ -1,13 +1,9 @@
-import { Controller, Post, Body, Get, Req } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Auth } from './auth.decorator';
-import { ApiOperation } from '@nestjs/swagger';
-import { User } from '../users/entities/user.entity';
-import { ResposeDTO } from './../base/dto/base.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   async login(@Body() loginDto: { email: string; password: string }) {
