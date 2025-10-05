@@ -1,7 +1,8 @@
 import { PermissionsGuard } from '../auth/permissions.guard';
 import { Logger, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
-@UseGuards(PermissionsGuard)
+@UseGuards(AuthGuard('jwt'), PermissionsGuard)
 export class BaseController {
   public logger: Logger;
 

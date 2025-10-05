@@ -14,9 +14,9 @@ import {
 export class PaginationRequestDTO {
   @ApiProperty({ required: true, default: 0 })
   @IsOptional()
-  @Transform(({ value }) =>
-    typeof value === 'string' ? parseInt(value, 10) : value,
-  )
+  @Transform(({ value }) => {
+    return Number(value);
+  })
   @IsInt()
   @Min(0)
   offset?: number;
@@ -26,9 +26,9 @@ export class PaginationRequestDTO {
   @IsInt()
   @Min(1)
   @Max(100)
-  @Transform(({ value }) =>
-    typeof value === 'string' ? parseInt(value, 10) : value,
-  )
+  @Transform(({ value }) => {
+    return Number(value);
+  })
   pageSize?: number;
 
   @ApiProperty({ required: false, type: 'string' })
@@ -60,7 +60,7 @@ export class PaginationResponseDTO {
   results: any[];
 }
 
-export class ResposeDTO {
+export class ResponseDTO {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
@@ -72,7 +72,9 @@ export class ResposeDTO {
 }
 
 export class IdDTO {
-  @Transform(({ value }) => parseInt(value, 10))
+  @Transform(({ value }) => {
+    return Number(value);
+  })
   @IsInt()
   id: number;
 }

@@ -14,7 +14,7 @@ import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { EmployeePaginationDto } from './dto/employee.pagination.dto';
-import { IdDTO, ResposeDTO } from './../base/dto/base.dto';
+import { IdDTO, ResponseDTO } from './../base/dto/base.dto';
 import { BaseController } from '../base/base.controller';
 import { Auth } from '../auth/auth.decorator';
 
@@ -33,7 +33,7 @@ export class EmployeesController extends BaseController {
   @ApiOperation({ summary: 'Create Employee' })
   async create(
     @Body() createEmployeeDto: CreateEmployeeDto,
-  ): Promise<ResposeDTO> {
+  ): Promise<ResponseDTO> {
     const employee = await this.employeesService.create(createEmployeeDto);
     return { status: 'success', data: employee };
   }
@@ -41,7 +41,7 @@ export class EmployeesController extends BaseController {
   @Get()
   @Auth('read:employees')
   @ApiOperation({ summary: 'Get all employees (paginated, filterable)' })
-  async findAll(@Query() query: EmployeePaginationDto): Promise<ResposeDTO> {
+  async findAll(@Query() query: EmployeePaginationDto): Promise<ResponseDTO> {
     const employees = await this.employeesService.findAll(query);
     return { status: 'success', data: employees };
   }
@@ -49,7 +49,7 @@ export class EmployeesController extends BaseController {
   @Get(':id')
   @Auth('read:employees')
   @ApiOperation({ summary: 'Get Employee by ID' })
-  async findOne(@Param() params: IdDTO): Promise<ResposeDTO> {
+  async findOne(@Param() params: IdDTO): Promise<ResponseDTO> {
     const employee = await this.employeesService.findOne(Number(params.id));
     return { status: 'success', data: employee };
   }
@@ -60,7 +60,7 @@ export class EmployeesController extends BaseController {
   async update(
     @Param() params: IdDTO,
     @Body() updateEmployeeDto: UpdateEmployeeDto,
-  ): Promise<ResposeDTO> {
+  ): Promise<ResponseDTO> {
     const employee = await this.employeesService.update(
       Number(params.id),
       updateEmployeeDto,
@@ -71,7 +71,7 @@ export class EmployeesController extends BaseController {
   @Delete(':id')
   @Auth('delete:employees')
   @ApiOperation({ summary: 'Delete Employee' })
-  async remove(@Param() params: IdDTO): Promise<ResposeDTO> {
+  async remove(@Param() params: IdDTO): Promise<ResponseDTO> {
     const result = await this.employeesService.remove(Number(params.id));
     return { status: 'success', data: result };
   }

@@ -9,37 +9,37 @@ export class UserDto {
   @ApiProperty({ required: false, type: 'string' })
   @IsOptional()
   @IsString()
-  firstName: string;
+  firstName?: string;
 
   @ApiProperty({ required: false, type: 'string' })
   @IsOptional()
   @IsString()
-  lastName: string;
+  lastName?: string;
 
   @ApiProperty({ required: false, type: 'string' })
   @IsOptional()
   @IsString()
-  email: string;
+  email?: string;
 
   @ApiProperty({ required: false, type: 'string' })
   @IsOptional()
   @IsString()
-  password: string;
+  password?: string;
 
   @ApiProperty({ required: false, type: 'string' })
   @IsOptional()
   @IsString()
-  role: Role;
+  role?: Role;
 
   @IsOptional()
   @IsDate()
-  created_at: Date;
+  created_at?: Date;
 
   @IsOptional()
   @IsDate()
-  updated_at: Date;
+  updated_at?: Date;
 
   @IsOptional()
   @IsDate()
-  deleted_at: Date;
+  deleted_at?: Date;
 }

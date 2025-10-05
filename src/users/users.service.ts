@@ -15,7 +15,6 @@ export class UsersService {
   ////////////////////////////////////////////////
   ////////////////////////////////////////////////
   async getBy(body: UserDto): Promise<User> {
-    console.log('body', body);
     const user = await this.userRepository.findOne({
       where: {
         id: body.id,
@@ -126,7 +125,7 @@ export class UsersService {
     await this.userRepository.save(
       this.userRepository.create({
         ...params.body,
-        password: await this._hashPassword(params.body.password),
+        password: await this._hashPassword(params.body.password || ''),
         createdAt: new Date(),
       }),
     );

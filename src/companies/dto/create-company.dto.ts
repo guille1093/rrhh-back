@@ -21,4 +21,14 @@ export class CreateCompanyDto {
   @IsOptional()
   @IsString()
   email?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  website?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  industry?: string;
 }

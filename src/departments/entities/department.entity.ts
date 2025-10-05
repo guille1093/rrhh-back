@@ -6,11 +6,15 @@ import {
   OneToMany,
   JoinColumn,
   Index,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Area } from '../../areas/entities/area.entity';
 import { Position } from '../../positions/entities/position.entity';
 import { Employee } from '../../employees/entities/employee.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity('departments')
 @Index(['name', 'area'], { unique: true })
@@ -35,4 +39,21 @@ export class Department {
 
   @OneToMany(() => Employee, (employee) => employee.department)
   employees: Employee[];
+
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
+  deletedAt?: Date;
+
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'created_by' })
+  createdBy: User;
+
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'updated_by' })
+  updatedBy: User;
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsInt, IsString } from 'class-validator';
+import { IsNotEmpty, IsInt, IsString, IsOptional } from 'class-validator';
 
 export class CreateAreaDto {
   @ApiProperty()
@@ -10,4 +10,9 @@ export class CreateAreaDto {
   @ApiProperty()
   @IsInt()
   companyId: number;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  code: string;
 }
