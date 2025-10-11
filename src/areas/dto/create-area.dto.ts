@@ -11,8 +11,13 @@ export class CreateAreaDto {
   @IsInt()
   companyId: number;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  code: string;
+  code?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

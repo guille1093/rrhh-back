@@ -26,6 +26,14 @@ export class Position {
   @ApiProperty()
   name: string;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  @ApiProperty({ required: false })
+  code?: string;
+
+  @Column({ type: 'text', nullable: true })
+  @ApiProperty({ required: false })
+  description?: string;
+
   @ManyToOne(() => Department, (department) => department.positions, {
     nullable: false,
     onDelete: 'CASCADE',

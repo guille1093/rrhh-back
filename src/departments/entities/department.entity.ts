@@ -27,6 +27,14 @@ export class Department {
   @ApiProperty()
   name: string;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  @ApiProperty({ required: false })
+  code?: string;
+
+  @Column({ type: 'text', nullable: true })
+  @ApiProperty({ required: false })
+  description?: string;
+
   @ManyToOne(() => Area, (area) => area.departments, {
     nullable: false,
     onDelete: 'CASCADE',
@@ -36,9 +44,6 @@ export class Department {
 
   @OneToMany(() => Position, (position) => position.department)
   positions: Position[];
-
-  @OneToMany(() => Employee, (employee) => employee.department)
-  employees: Employee[];
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;

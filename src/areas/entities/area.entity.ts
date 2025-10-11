@@ -14,7 +14,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Company } from '../../companies/entities/company.entity';
 import { Department } from '../../departments/entities/department.entity';
 import { User } from '../../users/entities/user.entity';
-import { IsOptional } from 'class-validator';
 
 @Entity('areas')
 @Index(['name', 'company'], { unique: true })
@@ -28,9 +27,12 @@ export class Area {
   name: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @ApiProperty()
-  code: string;
+  @ApiProperty({ required: false })
+  code?: string;
+
+  @Column({ type: 'text', nullable: true })
+  @ApiProperty({ required: false })
+  description?: string;
 
   @ManyToOne(() => Company, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'company_id' })

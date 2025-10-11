@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsInt, IsString } from 'class-validator';
+import { IsNotEmpty, IsInt, IsString, IsOptional } from 'class-validator';
 
 export class CreatePositionDto {
   @ApiProperty()
@@ -10,8 +9,15 @@ export class CreatePositionDto {
 
   @ApiProperty()
   @IsInt()
-  @Transform(({ value }) => {
-    return Number(value);
-  })
   departmentId: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  code?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

@@ -31,12 +31,6 @@ export class Employee {
   @ApiProperty()
   email: string;
 
-  @ManyToOne(() => Department, (department) => department.employees, {
-    nullable: false,
-    onDelete: 'CASCADE',
-  })
-  department: Department;
-
   @ManyToOne(() => Position, (position) => position.employees, {
     nullable: false,
     onDelete: 'CASCADE',
