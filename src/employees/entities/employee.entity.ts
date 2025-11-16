@@ -10,7 +10,6 @@ import { Request } from '../../requests/entities/request.entity';
 import { Health } from '../../health/entities/health.entity';
 import { Evaluation } from '../../evaluations/entities/evaluation.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Department } from '../../departments/entities/department.entity';
 import { Position } from '../../positions/entities/position.entity';
 
 @Entity('employees')

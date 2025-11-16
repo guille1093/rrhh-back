@@ -21,17 +21,12 @@ export class EmployeesService {
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
-    const department = await this.departmentRepository.findOneBy({
-      id: createEmployeeDto.departmentId,
-    });
-    if (!department) throw new NotFoundException('Department not found');
     const position = await this.positionRepository.findOneBy({
       id: createEmployeeDto.positionId,
     });
     if (!position) throw new NotFoundException('Position not found');
     const employee = this.employeeRepository.create({
       ...createEmployeeDto,
-      department,
       position,
     });
     return this.employeeRepository.save(employee);
@@ -40,8 +35,8 @@ export class EmployeesService {
   async findAll(query: EmployeePaginationDto): Promise<PaginationResponseDTO> {
     const qb = this.employeeRepository
       .createQueryBuilder('employee')
-      .leftJoinAndSelect('employee.department', 'department')
       .leftJoinAndSelect('employee.position', 'position')
+      .leftJoinAndSelect('position.department', 'department')
       .leftJoinAndSelect('department.area', 'area')
       .leftJoinAndSelect('area.company', 'company');
 
@@ -57,9 +52,6 @@ export class EmployeesService {
     }
     if (query.email) {
       qb.andWhere('employee.email ILIKE :email', { email: `%${query.email}%` });
-    }
-    if (query.companyId) {
-      qb.andWhere('company.id = :companyId', { companyId: query.companyId });
     }
     if (query.departmentId) {
       qb.andWhere('department.id = :departmentId', {
@@ -110,13 +102,6 @@ export class EmployeesService {
     updateEmployeeDto: UpdateEmployeeDto,
   ): Promise<Employee> {
     const employee = await this.findOne(id);
-    if (updateEmployeeDto.departmentId) {
-      const department = await this.departmentRepository.findOneBy({
-        id: updateEmployeeDto.departmentId,
-      });
-      if (!department) throw new NotFoundException('Department not found');
-      employee.department = department;
-    }
     if (updateEmployeeDto.positionId) {
       const position = await this.positionRepository.findOneBy({
         id: updateEmployeeDto.positionId,
