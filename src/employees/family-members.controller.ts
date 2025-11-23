@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import { FamilyMembersService } from './family-members.service';
-import { CreateFamilyMemberDto } from 'src/employees/dto/create-family-member.dto';
+import { CreateFamilyMemberDto } from '../employees/dto/create-family-member.dto';
 
 @Controller('family-members')
 export class FamilyMembersController {
