@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNotEmpty,
-  IsInt,
-  IsString,
-  IsDateString,
-  IsOptional,
-} from 'class-validator';
+import { IsInt, IsString, IsDateString, IsOptional } from 'class-validator';
 
 export class CreateHealthDto {
   @ApiProperty()

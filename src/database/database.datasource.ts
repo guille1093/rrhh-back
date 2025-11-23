@@ -18,6 +18,8 @@ import { Client } from '../clients/entities/client.entity';
 import { State } from '../states/entities/state.entity';
 import { City } from '../cities/entities/city.entity';
 import { Country } from '../countries/entities/country.entity';
+import { EmergencyContact } from '../employees/entities/emergency-contact.entity';
+import { FamilyMember } from '../employees/entities/family-member.entity';
 
 config();
 const configService = new ConfigService();
@@ -46,6 +48,8 @@ export const AppDataSource = new DataSource({
     State,
     City,
     Country,
+    EmergencyContact,
+    FamilyMember,
   ],
   migrations: [__dirname + '/../../db-migration/*.{ts,js}'],
   migrationsTableName: 'migrations',

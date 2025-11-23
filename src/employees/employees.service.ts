@@ -87,10 +87,10 @@ export class EmployeesService {
     const employee = await this.employeeRepository.findOne({
       where: { id },
       relations: [
-        'department',
         'position',
-        'department.area',
-        'department.area.company',
+        'position.department',
+        'position.department.area',
+        'position.department.area.company',
       ],
     });
     if (!employee) throw new NotFoundException('Employee not found');

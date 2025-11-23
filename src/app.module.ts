@@ -1,4 +1,3 @@
-import { Holiday } from './holidays/entities/holiday.entity';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
@@ -21,6 +20,8 @@ import { EvaluationsModule } from './evaluations/evaluations.module';
 import { ReportsModule } from './reports/reports.module';
 import { AlertsModule } from './alerts/alerts.module';
 import { HolidaysModule } from './holidays/holidays.module';
+import { EmergencyContactsModule } from './employees/emergency-contacts.module';
+import { FamilyMembersModule } from './employees/family-members.module';
 
 @Module({
   imports: [
@@ -47,6 +48,8 @@ import { HolidaysModule } from './holidays/holidays.module';
     EvaluationsModule,
     ReportsModule,
     AlertsModule,
+    EmergencyContactsModule,
+    FamilyMembersModule,
   ],
 })
 export class AppModule {}

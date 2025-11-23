@@ -24,6 +24,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             __dirname + '/../positions/entities/position.entity{.ts,.js}',
             __dirname + '/../employees/entities/employee.entity{.ts,.js}',
             __dirname + '/../employees/entities/contract.entity{.ts,.js}',
+            __dirname + '/../employees/entities/family-member.entity{.ts,.js}',
+            __dirname +
+              '/../employees/entities/emergency-contact.entity{.ts,.js}',
             __dirname + '/../requests/entities/request.entity{.ts,.js}',
             __dirname + '/../holidays/entities/holiday.entity{.ts,.js}',
             __dirname + '/../health/entities/health.entity{.ts,.js}',
