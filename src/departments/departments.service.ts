@@ -41,6 +41,8 @@ export class DepartmentsService {
       .createQueryBuilder('department')
       .where('department.deletedAt IS NULL')
       .leftJoinAndSelect('department.area', 'area')
+      .leftJoinAndSelect('department.positions', 'positions')
+      .leftJoinAndSelect('positions.employees', 'employees')
       .leftJoinAndSelect('department.createdBy', 'createdBy')
       .leftJoinAndSelect('department.updatedBy', 'updatedBy');
 

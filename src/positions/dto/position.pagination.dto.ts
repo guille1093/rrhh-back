@@ -14,6 +14,20 @@ export class PositionFilterDto {
     return Number(value);
   })
   departmentId?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Transform(({ value }) => {
+    return Number(value);
+  })
+  companyId?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Transform(({ value }) => {
+    return Number(value);
+  })
+  areaId?: number;
 }
 
 export class PositionPaginationDto extends IntersectionType(

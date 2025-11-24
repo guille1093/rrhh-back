@@ -39,6 +39,9 @@ export class PositionsService {
       .createQueryBuilder('position')
       .where('position.deletedAt IS NULL')
       .leftJoinAndSelect('position.department', 'department')
+      .leftJoinAndSelect('department.area', 'area')
+      .leftJoinAndSelect('area.company', 'company')
+      .leftJoinAndSelect('position.employees', 'employees')
       .leftJoinAndSelect('position.createdBy', 'createdBy')
       .leftJoinAndSelect('position.updatedBy', 'updatedBy');
 
@@ -48,6 +51,16 @@ export class PositionsService {
     if (query.departmentId) {
       qb.andWhere('position.department_id = :departmentId', {
         departmentId: query.departmentId,
+      });
+    }
+    if (query.companyId) {
+      qb.andWhere('company.id = :companyId', {
+        companyId: query.companyId,
+      });
+    }
+    if (query.areaId) {
+      qb.andWhere('area.id = :areaId', {
+        areaId: query.areaId,
       });
     }
 
@@ -71,7 +84,14 @@ export class PositionsService {
   async findOne(id: number): Promise<Position> {
     const position = await this.positionRepository.findOne({
       where: { id, deletedAt: IsNull() },
-      relations: ['department', 'createdBy', 'updatedBy'],
+      relations: [
+        'department',
+        'createdBy',
+        'updatedBy',
+        'department.area',
+        'department.area.company',
+        'employees',
+      ],
     });
     if (!position) throw new NotFoundException('Position not found');
     return position;

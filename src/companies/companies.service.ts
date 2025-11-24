@@ -33,6 +33,7 @@ export class CompaniesService {
       .leftJoinAndSelect('company.areas', 'areas')
       .leftJoinAndSelect('areas.departments', 'departments')
       .leftJoinAndSelect('departments.positions', 'positions')
+      .leftJoinAndSelect('positions.employees', 'employees')
       .leftJoinAndSelect('company.createdBy', 'createdBy')
       .leftJoinAndSelect('company.updatedBy', 'updatedBy');
 
