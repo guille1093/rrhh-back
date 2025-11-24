@@ -16,14 +16,26 @@ export class HealthService {
   ) {}
 
   async create(createHealthDto: CreateHealthDto): Promise<Health> {
+    const { employeeId, realizationDate, expirationDate, ...rest } =
+      createHealthDto;
+
     const employee = await this.employeeRepository.findOneBy({
-      id: createHealthDto.employeeId,
+      id: employeeId,
     });
-    if (!employee) throw new NotFoundException('Employee not found');
+    if (!employee) {
+      throw new NotFoundException(`Employee with ID ${employeeId} not found`);
+    }
+
     const health = this.healthRepository.create({
-      ...createHealthDto,
+      ...rest,
       employee,
+      realizationDate: new Date(realizationDate),
     });
+
+    if (expirationDate) {
+      health.expirationDate = new Date(expirationDate);
+    }
+
     return this.healthRepository.save(health);
   }
 
@@ -36,24 +48,45 @@ export class HealthService {
       where: { id },
       relations: ['employee'],
     });
-    if (!health) throw new NotFoundException('Health record not found');
+    if (!health) {
+      throw new NotFoundException(`Health record with ID ${id} not found`);
+    }
     return health;
   }
 
   async update(id: number, updateHealthDto: UpdateHealthDto): Promise<Health> {
+    const { employeeId, realizationDate, expirationDate, ...rest } =
+      updateHealthDto;
     const health = await this.findOne(id);
-    if (updateHealthDto.employeeId) {
+
+    if (employeeId) {
       const employee = await this.employeeRepository.findOneBy({
-        id: updateHealthDto.employeeId,
+        id: employeeId,
       });
-      if (!employee) throw new NotFoundException('Employee not found');
+      if (!employee) {
+        throw new NotFoundException(`Employee with ID ${employeeId} not found`);
+      }
       health.employee = employee;
     }
-    Object.assign(health, updateHealthDto);
+
+    // Assign non-date properties
+    Object.assign(health, rest);
+
+    // Handle date properties separately
+    if (realizationDate) {
+      health.realizationDate = new Date(realizationDate);
+    }
+    if (updateHealthDto.hasOwnProperty('expirationDate')) {
+      health.expirationDate = expirationDate ? new Date(expirationDate) : null;
+    }
+
     return this.healthRepository.save(health);
   }
 
   async remove(id: number): Promise<void> {
-    await this.healthRepository.delete(id);
+    const result = await this.healthRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Health record with ID ${id} not found`);
+    }
   }
 }

@@ -24,6 +24,9 @@ export class EmployeeFilterDto {
 
   @IsOptional()
   positionId?: number;
+
+  @IsOptional()
+  areaId?: number;
 }
 
 export class EmployeePaginationDto extends IntersectionType(

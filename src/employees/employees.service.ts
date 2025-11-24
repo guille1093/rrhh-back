@@ -38,7 +38,13 @@ export class EmployeesService {
       .leftJoinAndSelect('employee.position', 'position')
       .leftJoinAndSelect('position.department', 'department')
       .leftJoinAndSelect('department.area', 'area')
-      .leftJoinAndSelect('area.company', 'company');
+      .leftJoinAndSelect('area.company', 'company')
+      .leftJoinAndSelect('employee.contracts', 'contracts')
+      .leftJoinAndSelect('employee.requests', 'requests')
+      .leftJoinAndSelect('employee.healthRecords', 'healthRecords')
+      .leftJoinAndSelect('employee.evaluations', 'evaluations')
+      .leftJoinAndSelect('employee.familyMembers', 'familyMembers')
+      .leftJoinAndSelect('employee.emergencyContacts', 'emergencyContacts');
 
     if (query.firstName) {
       qb.andWhere('employee.firstName ILIKE :firstName', {
@@ -61,6 +67,11 @@ export class EmployeesService {
     if (query.positionId) {
       qb.andWhere('position.id = :positionId', {
         positionId: query.positionId,
+      });
+    }
+    if (query.areaId) {
+      qb.andWhere('area.id = :areaId', {
+        areaId: query.areaId,
       });
     }
 
@@ -91,6 +102,12 @@ export class EmployeesService {
         'position.department',
         'position.department.area',
         'position.department.area.company',
+        'emergencyContacts',
+        'healthRecords',
+        'evaluations',
+        'familyMembers',
+        'emergencyContacts',
+        'contracts',
       ],
     });
     if (!employee) throw new NotFoundException('Employee not found');

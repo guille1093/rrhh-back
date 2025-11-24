@@ -1,21 +1,36 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString, IsDateString, IsOptional } from 'class-validator';
+import {
+  IsInt,
+  IsDateString,
+  IsOptional,
+  IsEnum,
+  IsNotEmpty,
+} from 'class-validator';
+import { ExamType, AptitudeResult } from '../entities/health.entity';
 
 export class CreateHealthDto {
   @ApiProperty()
   @IsInt()
+  @IsNotEmpty()
   employeeId: number;
 
-  @ApiProperty()
-  @IsString()
-  type: string;
+  @ApiProperty({ enum: ExamType })
+  @IsEnum(ExamType)
+  @IsNotEmpty()
+  type: ExamType;
+
+  @ApiProperty({ enum: AptitudeResult })
+  @IsEnum(AptitudeResult)
+  @IsNotEmpty()
+  result: AptitudeResult;
 
   @ApiProperty()
   @IsDateString()
-  date: string;
+  @IsNotEmpty()
+  realizationDate: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
-  notes?: string;
+  @IsDateString()
+  expirationDate?: string;
 }

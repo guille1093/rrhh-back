@@ -69,7 +69,7 @@ export class CompaniesService {
       relations: [
         'areas',
         'areas.departments',
-        'areas.departments.positions',
+        'areas.departments.positions.employees',
         'createdBy',
         'updatedBy',
       ],
