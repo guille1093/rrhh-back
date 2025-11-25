@@ -108,6 +108,7 @@ export class EmployeesService {
         'familyMembers',
         'emergencyContacts',
         'contracts',
+        'requests',
       ],
     });
     if (!employee) throw new NotFoundException('Employee not found');
@@ -132,5 +133,91 @@ export class EmployeesService {
 
   async remove(id: number): Promise<void> {
     await this.employeeRepository.delete(id);
+  }
+
+  async getCompanyReport(companyId: number) {
+    // 1. Cantidad de empleados por empresa
+    const totalEmployees = await this.employeeRepository
+      .createQueryBuilder('employee')
+      .leftJoin('employee.position', 'position')
+      .leftJoin('position.department', 'department')
+      .leftJoin('department.area', 'area')
+      .leftJoin('area.company', 'company')
+      .where('company.id = :companyId', { companyId })
+      .getCount();
+
+    // 2. Cantidad de empleados activos en el sistema
+    const activeEmployees = await this.employeeRepository
+      .createQueryBuilder('employee')
+      .leftJoin('employee.position', 'position')
+      .leftJoin('position.department', 'department')
+      .leftJoin('department.area', 'area')
+      .leftJoin('area.company', 'company')
+      .where('company.id = :companyId', { companyId })
+      .getCount();
+
+    // 3. Cantidad de empleados por Área – Departamento - Puesto
+    const byAreaDeptPosition = await this.employeeRepository
+      .createQueryBuilder('employee')
+      .select([
+        'area.id as areaId',
+        'area.name as areaName',
+        'department.id as departmentId',
+        'department.name as departmentName',
+        'position.id as positionId',
+        'position.name as positionName',
+        'COUNT(employee.id) as employeeCount',
+      ])
+      .leftJoin('employee.position', 'position')
+      .leftJoin('position.department', 'department')
+      .leftJoin('department.area', 'area')
+      .leftJoin('area.company', 'company')
+      .where('company.id = :companyId', { companyId })
+      .groupBy('area.id, department.id, position.id')
+      .getRawMany();
+
+    // 4. Empleados por Tipos de contratos (empleados únicos por tipo)
+    // 4. Empleados por Tipos de contratos (empleados únicos por contractType)
+    const byContractType = await this.employeeRepository
+      .createQueryBuilder('employee')
+      .select([
+        'contracts.contractType as contractType',
+        'COUNT(DISTINCT employee.id) as employeeCount',
+      ])
+      .leftJoin('employee.contracts', 'contracts')
+      .leftJoin('employee.position', 'position')
+      .leftJoin('position.department', 'department')
+      .leftJoin('department.area', 'area')
+      .leftJoin('area.company', 'company')
+      .where('company.id = :companyId', { companyId })
+      .andWhere('contracts.contractType IS NOT NULL')
+      .groupBy('contracts.contractType')
+      .getRawMany();
+
+    // 5. Contratos registrados historial con fechas para gráfico
+    const contractsHistory = await this.employeeRepository
+      .createQueryBuilder('employee')
+      .select([
+        'contracts.id as contractId',
+        'contracts.startDate as startDate',
+        'contracts.endDate as endDate',
+        'employee.id as employeeId',
+        'employee.firstName as employeeFirstName',
+        'employee.lastName as employeeLastName',
+      ])
+      .leftJoin('employee.contracts', 'contracts')
+      .leftJoin('employee.position', 'position')
+      .leftJoin('position.department', 'department')
+      .leftJoin('department.area', 'area')
+      .leftJoin('area.company', 'company')
+      .where('company.id = :companyId', { companyId })
+      .getRawMany();
+    return {
+      totalEmployees,
+      activeEmployees,
+      byAreaDeptPosition,
+      byContractType,
+      contractsHistory,
+    };
   }
 }

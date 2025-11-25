@@ -42,7 +42,10 @@ export class RequestsService {
   }
 
   async findAll(): Promise<Request[]> {
-    return this.requestRepository.find({ relations: ['employee'] });
+    return this.requestRepository.find({
+      where: { status: 'PENDIENTE' },
+      relations: ['employee'],
+    });
   }
 
   async findOne(id: number): Promise<Request> {

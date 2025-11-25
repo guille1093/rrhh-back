@@ -38,6 +38,15 @@ export class EmployeesController extends BaseController {
     return { status: 'success', data: employee };
   }
 
+  @Get('report/:companyId')
+  @ApiOperation({ summary: 'Get company report for dashboards' })
+  async getCompanyReport(@Param('companyId') companyId: number) {
+    const report = await this.employeesService.getCompanyReport(
+      Number(companyId),
+    );
+    return { status: 'success', data: report };
+  }
+
   @Get()
   @Auth('read:employees')
   @ApiOperation({ summary: 'Get all employees (paginated, filterable)' })
