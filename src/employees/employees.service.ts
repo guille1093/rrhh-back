@@ -153,7 +153,6 @@ export class EmployeesService {
       .leftJoin('position.department', 'department')
       .leftJoin('department.area', 'area')
       .leftJoin('area.company', 'company')
-      .where('company.id = :companyId', { companyId })
       .getCount();
 
     // 3. Cantidad de empleados por Área – Departamento - Puesto
